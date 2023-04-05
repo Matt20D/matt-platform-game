@@ -3,10 +3,11 @@ from typing import Final
 
 class Player(pygame.sprite.Sprite):
     """
-    This player class inherits from pygame.sprite
+    This player class inherits from pygame.sprite.Sprite
     """
 
     COLOR: Final = (255, 0, 0)
+    GRAVITY: Final = 1
 
     def __init__(self, x, y, width, height):
 
@@ -21,6 +22,8 @@ class Player(pygame.sprite.Sprite):
         self.mask = None
         self.direction = "left"
         self.animation_count = 0
+
+        self.fall_time = 0
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -47,10 +50,17 @@ class Player(pygame.sprite.Sprite):
         ...
 
     def loop(self, fps):
+        self.y_vel += min(1, self.calc_gravity_acceleration(fps))
         self.move(self.x_vel, self.y_vel)
+
+        self.fall_time += 1
 
     def draw(self, window):
         pygame.draw.rect(window, self.COLOR, self.rect)
+
+    def calc_gravity_acceleration(self, fps):
+
+        return (self.fall_time / fps) * self.GRAVITY
 
     @staticmethod
     def handle_move(player, velocity):
