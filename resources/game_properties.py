@@ -6,7 +6,7 @@ class GameProperties:
     WINDOW_NAME: Final = "Duran Games"
     WINDOW_WIDTH: Final = 1000
     WINDOW_HEIGHT: Final = 800
-    FRAMES_PER_SECOND: Final = 60
+    FRAMES_PER_SECOND: Final = 40
     PLAYER_VELOCITY: Final = 5
 
     # initialize the object

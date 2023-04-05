@@ -33,11 +33,12 @@ class BackgroundUtils:
         return tiles, loaded_image
 
     @staticmethod
-    def draw(window, background_tile_locations, bg_image) -> None:
+    def draw(window, background_tile_locations, bg_image, player) -> None:
         """
         Draws the background image into the window at each
         tile location.
 
+        :param player: to display
         :param window: game_window
         :param background_tile_locations: list of i,j coord of where to draw
         :param bg_image: loaded tile image object
@@ -46,5 +47,7 @@ class BackgroundUtils:
 
         for tile_loc in background_tile_locations:
             window.blit(bg_image, tile_loc)
+
+        player.draw(window)
 
         pygame.display.update()

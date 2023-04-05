@@ -14,6 +14,7 @@ from os.path import isfile, join
 # Game Source Code
 from resources.game_properties import GameProperties
 from src.util.background_utils import BackgroundUtils
+from src.classes.Player import Player
 
 # initialize the pygame module
 pygame.init()
@@ -36,6 +37,8 @@ def main(window):
     clock = pygame.time.Clock()
     background, bg_image = BackgroundUtils.get_background("Blue.png", WIDTH, HEIGHT)
 
+    player = Player(100, 100, 50, 50)
+
     run = True
     while run:
 
@@ -50,8 +53,12 @@ def main(window):
                 run = False
                 break
 
+        # allow for continual movement of the frame
+        player.loop(FPS)
+        Player.handle_move(player, PLAYER_VELOCITY)
+
         # draw the full background
-        BackgroundUtils.draw(window, background, bg_image)
+        BackgroundUtils.draw(window, background, bg_image, player)
 
     pygame.quit()
     # quit()
