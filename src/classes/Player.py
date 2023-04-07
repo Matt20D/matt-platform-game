@@ -1,5 +1,7 @@
 import pygame
 from typing import Final
+from src.util.player_animation_utils import PlayerAnimationUtils
+
 
 class Player(pygame.sprite.Sprite):
     """
@@ -8,6 +10,8 @@ class Player(pygame.sprite.Sprite):
 
     COLOR: Final = (255, 0, 0)
     GRAVITY: Final = 1
+    SPRITES = \
+        PlayerAnimationUtils.load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True)
 
     def __init__(self, x, y, width, height):
 

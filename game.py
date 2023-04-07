@@ -7,29 +7,13 @@
 import os
 import random
 import math
-import pygame
 from os import listdir
 from os.path import isfile, join
 
 # Game Source Code
-from resources.game_properties import GameProperties
+from resources.config import *
 from src.util.background_utils import BackgroundUtils
 from src.classes.Player import Player
-
-# initialize the pygame module
-pygame.init()
-
-# set the caption for top of the window
-pygame.display.set_caption(GameProperties.WINDOW_NAME)
-
-# Depends on the size of the screen
-WIDTH, HEIGHT = GameProperties.WINDOW_WIDTH, GameProperties.WINDOW_HEIGHT
-FPS = GameProperties.FRAMES_PER_SECOND
-
-# Speed that player moves on the screen
-PLAYER_VELOCITY = GameProperties.FRAMES_PER_SECOND
-
-game_window = pygame.display.set_mode((WIDTH, HEIGHT))
 
 
 # This will handle our event loop
