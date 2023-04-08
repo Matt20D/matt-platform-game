@@ -4,15 +4,10 @@
 # First commit: 4/3/2023                        #
 #################################################
 
-import os
-import random
-import math
-from os import listdir
-from os.path import isfile, join
-
 # Game Source Code
 from resources.config import *
 from src.util.background_utils import BackgroundUtils
+from src.util.event_utils import EventUtils
 from src.classes.Player import Player
 
 
@@ -21,7 +16,7 @@ def main(window):
     clock = pygame.time.Clock()
     background, bg_image = BackgroundUtils.get_background("Blue.png", WIDTH, HEIGHT)
 
-    player = Player(100, 100, 50, 50)
+    player = EventUtils.handle_character_choice()
 
     run = True
     while run:

@@ -10,10 +10,9 @@ class Player(pygame.sprite.Sprite):
 
     COLOR: Final = (255, 0, 0)
     GRAVITY: Final = 1
-    SPRITES = \
-        PlayerAnimationUtils.load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True)
+    AVAILABLE_PLAYERS: Final = {"MaskDude", "NinjaFrog", "PinkMan", "VirtualGuy"}
 
-    def __init__(self, x, y, width, height):
+    def __init__(self, x, y, width, height, main_character):
 
         # this rect allows us to do collisions between our
         # sprites
@@ -28,6 +27,9 @@ class Player(pygame.sprite.Sprite):
         self.animation_count = 0
 
         self.fall_time = 0
+
+        self.sprites = \
+            PlayerAnimationUtils.load_sprite_sheets("MainCharacters", main_character, 32, 32, True)
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -59,9 +61,13 @@ class Player(pygame.sprite.Sprite):
 
         self.fall_time += 1
 
+    # def update_sprite(self, sprite_sheet="idle"):
+    #
+    #     if se
+
     def draw(self, window):
         # get the first frame
-        self.sprite = self.SPRITES["idle_" + self.direction][0]
+        self.sprite = self.sprites["idle_" + self.direction][0]
 
         window.blit(self.sprite, (self.rect.x, self.rect.y))
 
