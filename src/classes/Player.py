@@ -12,6 +12,10 @@ class Player(pygame.sprite.Sprite):
     GRAVITY: Final = 1
     AVAILABLE_PLAYERS: Final = {"MaskDude", "NinjaFrog", "PinkMan", "VirtualGuy"}
 
+    # iterate through the sprites and change the sprite we are showing
+    # to show that we are animating. This delay in between rotating sprites
+    ANIMATION_DELAY: Final = 2
+
     def __init__(self, x, y, width, height, main_character):
 
         # this rect allows us to do collisions between our
@@ -60,14 +64,23 @@ class Player(pygame.sprite.Sprite):
         self.move(self.x_vel, self.y_vel)
 
         self.fall_time += 1
+        self.update_sprite()
 
-    # def update_sprite(self, sprite_sheet="idle"):
-    #
-    #     if se
+    def update_sprite(self, sprite_sheet="idle"):
+
+        if self.x_vel != 0:
+            sprite_sheet = "run"
+
+        sprite_sheet_name = sprite_sheet + "_" + self.direction
+        animation_sprites = self.sprites[sprite_sheet_name]
+
+        # every x number of frames we want to show a different frame
+        sprite_index = (self.animation_count // self.ANIMATION_DELAY) % len(animation_sprites)
+
+        self.sprite = animation_sprites[sprite_index]
+        self.animation_count += 1
 
     def draw(self, window):
-        # get the first frame
-        self.sprite = self.sprites["idle_" + self.direction][0]
 
         window.blit(self.sprite, (self.rect.x, self.rect.y))
 
